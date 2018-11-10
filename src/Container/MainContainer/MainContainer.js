@@ -10,6 +10,8 @@ export class MainContainer extends Component {
   state = {
     query: '',
     settingsNumber: 25,
+    settingsDummy:25,
+    settingsShow: false,
     results : {
       _total: 0,
       streams: []
@@ -27,14 +29,32 @@ export class MainContainer extends Component {
   }
 
   handleSettingsInput = (e) => {
-    this.setState( {settingsNumber: e.target.value} );
+    if( e.target.value > 0 && e.target.value <= 100){
+      this.setState( {settingsDummy: e.target.value} );
+      return true;
+    } else {
+      return false;
+    }
+    
   }
   
+  handleSettingsSave = (e) => {
+    this.setState ( {settingsNumber: this.state.settingsDummy});
+  }
+
   handleClickedStream = (stream, e) => {
     this.setState({
       channelId: e.target.dataset.id,
       stream: stream});
     this.props.history.push(`/channel?id=${e.target.dataset.id}`);
+  }
+
+  toggleSettingsShow = () => {
+    this.setState((prevState)=> {
+      return {
+        settingsShow: !prevState.settingsShow
+      }
+    })
   }
 
   fetchStreams = debounce(() => {
@@ -86,13 +106,19 @@ export class MainContainer extends Component {
     }
   }
   render() {
-    const {handleSearchInput, handleSettingsInput, state, handleClickedStream, fetchSpecifStream} = this;
-    const {query, settingsNumber, results, channelId,stream} = state;
+    const {
+          handleSearchInput, handleSettingsInput,
+          state, handleClickedStream, fetchSpecifStream,
+          handleSettingsSave, toggleSettingsShow} = this;
+    const {settingsShow, query, results, channelId, stream, settingsDummy} = state;
     const navbarProps = {
       query: query,
-      settingsNumber: settingsNumber,
+      settingsDummy: settingsDummy,
+      settingsShow: settingsShow,
       handleSearchInput: handleSearchInput,
-      handleSettingsInput:handleSettingsInput
+      handleSettingsInput:handleSettingsInput,
+      handleSettingsSave: handleSettingsSave,
+      toggleSettingsShow: toggleSettingsShow
     };
     const resultsProps = {
       results:results,

@@ -9,12 +9,15 @@ export const Navbar = React.memo((props) => {
   }
   const settingsProps = {
     handleSettingsInput: props.handleSettingsInput,
-    settingsNumber: props.settingsNumber,
+    settingsDummy: props.settingsDummy,
+    settingsShow: props.settingsShow,
+    handleSettingsSave: props.handleSettingsSave
   }
   return (
     <div className="navbar">
       <Logo></Logo>
       <Search {...searchProps}></Search>
+      <img className="settings-icon" onClick={props.toggleSettingsShow} alt="Toggle settings" src="assets/images/controls.svg"/>
       <Settings {...settingsProps}></Settings>
     </div>
   )
