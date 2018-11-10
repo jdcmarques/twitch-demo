@@ -1,0 +1,30 @@
+.streamCard{
+    width:300px;
+    display:flex;
+    flex-direction: column;
+    border: 2px solid #6d6d6d;
+    margin:10px;
+  }
+  
+  .info{
+    display:flex;
+    flex-direction: row;
+  }
+  
+  .streamCard .info .logo{
+    width: 50px;
+  }
+  
+  .information{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 1rem;
+    min-width: 0;
+  }
+  
+  .information > span {
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+  }

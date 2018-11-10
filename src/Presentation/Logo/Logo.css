@@ -1,0 +1,14 @@
+.logo{
+  display:flex;
+  color: #fff;
+  padding: 10px;
+  justify-content: left;
+  align-self: center;
+  font-size:30px;
+}
+  
+.logo img{
+  height:40px;
+  margin-right: 10px;
+}
+  

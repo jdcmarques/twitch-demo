@@ -1,11 +1,11 @@
 import React from 'react'
 import './Settings.css'
-const Settings = () => {
+export const Settings = React.memo(() => {
   return (
-    <div>
-      
+    <div className="settings">
+      13
     </div>
   )
-}
+})
 
 export default Settings

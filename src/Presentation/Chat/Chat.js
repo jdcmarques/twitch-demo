@@ -1,12 +1,12 @@
 import React from 'react';
 import './Chat.css';
 
-const Chat = () => {
+export const Chat = React.memo(() => {
   return (
     <div>
       
     </div>
   )
-}
+})
 
 export default Chat

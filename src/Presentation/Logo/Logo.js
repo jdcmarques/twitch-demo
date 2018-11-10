@@ -1,11 +1,13 @@
 import React from 'react'
 import './Logo.css'
-const Logo = () => {
+
+export const Logo = React.memo(() => {
   return (
-    <div>
-      
+    <div className="logo">
+      <img alt="Logo" src="assets/images/twitch_white.svg"></img>
+      <span>Twitch Viewer</span>
     </div>
   )
-}
+})
 
 export default Logo

@@ -1,12 +1,12 @@
 import React from 'react'
 import './LandingPage.css'
 
-const LandingPage = () => {
+export const LandingPage = React.memo(() => {
   return (
     <div>
-      
+      Landing Page
     </div>
   )
-}
+})
 
 export default LandingPage

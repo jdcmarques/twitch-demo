@@ -1,11 +1,11 @@
 import React from 'react'
 import './Iframe.css'
-const Iframe = () => {
+export const Iframe = React.memo(() => {
   return (
     <div>
       
     </div>
   )
-}
+})
 
 export default Iframe

@@ -1,12 +1,12 @@
 import React from 'react'
 import './StreamDescription.css'
 
-const StreamDescription = () => {
+export const StreamDescription = React.memo(() => {
   return (
     <div>
       
     </div>
   )
-}
+})
 
 export default StreamDescription

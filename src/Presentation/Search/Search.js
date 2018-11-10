@@ -1,12 +1,16 @@
 import React from 'react'
 import './Search.css'
 
-const Search = () => {
+export const Search = React.memo((props) => {
   return (
-    <div>
-      
+    <div className="search">
+        <input
+        value={props.query}
+        placeholder="Search for..."
+        onChange={props.handleSearchInput}
+        />
     </div>
   )
-}
+})
 
 export default Search
