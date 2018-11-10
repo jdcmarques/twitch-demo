@@ -2,11 +2,10 @@ import React from 'react'
 import './ResultsItem.css'
 
 export const ResultsItem = React.memo((props) => {
-  console.log(props);
   const {stream} = props;
   return (
     <div className="streamCard">
-      <img className="preview" alt={stream.channel.name} src={stream.preview.medium} data-name={stream.channel.name} onClick={props.handleClickedStream}></img>
+      <img className="preview" alt={stream.channel.name} src={stream.preview.medium} data-id={stream.channel._id} onClick={(evt) => props.handleClickedStream(stream, evt)}></img>
       <div className="info">
         <img className="logo" alt={stream.channel.name} src={stream.channel.logo}/>
         <div className="information">

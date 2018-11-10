@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Navbar, LandingPage, ResultsGrid } from "../../Utils/ImportsPresentation";
-import { StreamPage } from "../StreamPage/StreamPage";
+import { StreamPageContainer } from "../StreamPageContainer/StreamPageContainer";
 import { debounce } from '../../Utils/AuxiliarFunctions';
 import * as TwitchAPI from '../../Utils/TwitchAPI';
 import { Route, Switch } from 'react-router-dom';
+import queryString from 'query-string';
 
 export class MainContainer extends Component {
   state = {
@@ -12,7 +13,13 @@ export class MainContainer extends Component {
     results : {
       _total: 0,
       streams: []
-    }
+    },
+    channelId: '',
+    stream : {
+      channel:{
+
+      }
+    },
   }
 
   handleSearchInput = (e) => {
@@ -22,9 +29,14 @@ export class MainContainer extends Component {
   handleSettingsInput = (e) => {
     this.setState( {settingsNumber: e.target.value} );
   }
-  handleClickedStream = (e) => {
-    this.props.history.push(`/channel?name=${e.target.dataset.name}`);
+  
+  handleClickedStream = (stream, e) => {
+    this.setState({
+      channelId: e.target.dataset.id,
+      stream: stream});
+    this.props.history.push(`/channel?id=${e.target.dataset.id}`);
   }
+
   fetchStreams = debounce(() => {
     const {query, settingsNumber} = this.state;
     if(this.state.query !== '') {
@@ -43,6 +55,22 @@ export class MainContainer extends Component {
     }
   } ,1000)
 
+  fetchSpecifStream = (channelId) => {
+    TwitchAPI.getStreamById(channelId)
+      .then(
+        res => {
+          this.setState({
+            stream:res.stream, 
+            channelId:channelId});
+        }
+      )
+      .catch(
+        err => {
+          console.log(err);
+        }
+      )
+  }
+
   componentDidUpdate = (prevProps, prevState) => {
     if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
       this.fetchStreams();
@@ -50,11 +78,16 @@ export class MainContainer extends Component {
   }
 
   componentDidMount = () => {
-
+    const parsed = queryString.parse(this.props.location.search);
+    if(parsed.id) {
+      this.fetchSpecifStream(parsed.id);
+    } else if(parsed.query) {
+      this.setState({query: parsed.query})
+    }
   }
   render() {
-    const {handleSearchInput, handleSettingsInput, state, handleClickedStream} = this;
-    const {query, settingsNumber, results} = state;
+    const {handleSearchInput, handleSettingsInput, state, handleClickedStream, fetchSpecifStream} = this;
+    const {query, settingsNumber, results, channelId,stream} = state;
     const navbarProps = {
       query: query,
       settingsNumber: settingsNumber,
@@ -63,7 +96,13 @@ export class MainContainer extends Component {
     };
     const resultsProps = {
       results:results,
-      handleClickedStream: handleClickedStream
+      handleClickedStream: handleClickedStream,
+      
+    }
+    const streamProps = {
+      channelId: channelId,
+      stream: stream,
+      fetchSpecifStream: fetchSpecifStream
     }
 
     return (
@@ -72,9 +111,8 @@ export class MainContainer extends Component {
         <Switch>
           <Route exact path ="/" render={()=> (<LandingPage/>)}></Route>
           <Route path= "/search" render={() => ( <ResultsGrid {...resultsProps}/>)}></Route>
-          <Route path= "/channel" render={() => ( <StreamPage />)}></Route>
+          <Route path= "/channel" render={() => ( <StreamPageContainer {...streamProps}/>)}></Route>
         </Switch>
-        
       </div>
     )
   }

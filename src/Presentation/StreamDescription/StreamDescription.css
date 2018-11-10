@@ -1,0 +1,56 @@
+.description_container{
+    min-height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.info{
+    display:flex;
+    flex-direction: row;
+    width:90%;
+}
+
+.info .logo{
+    width: 50px;
+}
+  
+.information{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 1rem;
+    min-width: 0;
+}
+
+.information > span {
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.chatToggle {
+    width:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor:pointer;
+}
+.chatToggle img{
+    width: 20px;
+    text-align: center;
+}
+.chatToggle:hover {
+    background-color: #ece9e9;
+}
+.chatToggle img.rotate {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 768px) {
+    .chatToggle img{
+        transform: rotate(90deg);
+    }
+    .chatToggle img.rotate {
+        transform: rotate(-90deg);
+    }
+}

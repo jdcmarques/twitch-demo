@@ -28,9 +28,16 @@ axios.get(`${api}search/games?query=${query}&limit=${limit}`,{
 
 export const searchStreams = (query,limit) =>
   axios.get(`${api}search/streams?query=${query}&limit=${limit}`,{
-    method: 'GET',
     headers: {
       ...headers,
     },
   }).then(res => res.data)
+  .catch(err => err);
+
+export const getStreamById = (query) =>
+  axios.get(`${api}streams/${query}`,{
+    headers: {
+      ...headers,
+    },
+  }).then(res=> res.data)
   .catch(err => err);

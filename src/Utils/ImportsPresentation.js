@@ -8,7 +8,7 @@ export { ResultsItem } from "../Presentation/ResultsItem/ResultsItem";
 export { Search } from "../Presentation/Search/Search";
 export { Settings } from "../Presentation/Settings/Settings";
 export { StreamDescription } from "../Presentation/StreamDescription/StreamDescription";
-export { StreamPage } from "../Presentation/StreamPage/StreamPage";
 export { LandingPage } from '../Presentation/LandingPage/LandingPage';
+export { StreamPage } from '../Presentation/StreamPage/StreamPage'
 /* eslint-enable no-unused-vars */
 
