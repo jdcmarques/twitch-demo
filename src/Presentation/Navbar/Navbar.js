@@ -1,6 +1,6 @@
 import React from 'react'
 import './Navbar.css'
-import { Logo, Search, Settings } from "../../Utils/ImportsPresentation";
+import { Logo, Search, SettingsIcon } from "../../Utils/ImportsPresentation";
 
 export const Navbar = React.memo((props) => {
   const searchProps = {
@@ -11,14 +11,14 @@ export const Navbar = React.memo((props) => {
     handleSettingsInput: props.handleSettingsInput,
     settingsDummy: props.settingsDummy,
     settingsShow: props.settingsShow,
-    handleSettingsSave: props.handleSettingsSave
+    handleSettingsSave: props.handleSettingsSave,
+    toggleSettingsShow: props.toggleSettingsShow,
   }
   return (
     <div className="navbar">
-      <Logo></Logo>
+      <Logo returnHome={props.returnHome}></Logo>
       <Search {...searchProps}></Search>
-      <img className="settings-icon" onClick={props.toggleSettingsShow} alt="Toggle settings" src="assets/images/controls.svg"/>
-      <Settings {...settingsProps}></Settings>
+      <SettingsIcon {...settingsProps}></SettingsIcon>
     </div>
   )
 })

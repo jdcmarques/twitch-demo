@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StreamPage } from "../../Utils/ImportsPresentation";
+import { StreamPage, LoadingAnimation } from "../../Utils/ImportsPresentation";
 import * as TwitchAPI from '../../Utils/TwitchAPI';
 export class StreamPageContainer extends Component {
   state= {
@@ -11,7 +11,8 @@ export class StreamPageContainer extends Component {
       streamer : '',
       viewers: '',
       logo: '',
-    }
+    },
+    loading:true,
   }
   
   toggleChat = () => {
@@ -66,7 +67,8 @@ export class StreamPageContainer extends Component {
         logo: stream.channel.logo,
       },
       videoUrl: `https://player.twitch.tv/?channel=${stream.channel.name}&muted=true&autoplay=true`,
-      chatUrl:  `https://www.twitch.tv/embed/${stream.channel.name}/chat`
+      chatUrl:  `https://www.twitch.tv/embed/${stream.channel.name}/chat`,
+      loading:false,
     })
     this.interval = setInterval(this.getUpdatedViewers, 3000);
   }
@@ -85,7 +87,10 @@ export class StreamPageContainer extends Component {
       chatUrl: this.state.chatUrl
     }
     return (
-      <StreamPage {...streamPageProps}></StreamPage>
+      <div>
+        {this.state.loading && <LoadingAnimation></LoadingAnimation>}
+        <StreamPage {...streamPageProps}></StreamPage>
+      </div>
     )
   }
 }
