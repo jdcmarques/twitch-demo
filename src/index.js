@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 if (process.env.NODE_ENV !== 'production') {
     const {whyDidYouUpdate} = require('why-did-you-update')
-    whyDidYouUpdate(React, { exclude: [/^App/] });
+    whyDidYouUpdate(React, { exclude: [/^App/,/^Route/] });
     
     const {registerObserver} = require('react-perf-devtool');
     // Simple, no?

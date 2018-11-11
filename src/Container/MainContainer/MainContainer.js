@@ -114,7 +114,6 @@ export class MainContainer extends Component {
 		TwitchAPI.getStreamById(channelId)
 			.then(
 				res => {
-					console.log(res);
 					this.setState({
 						stream:res.stream, 
 						channelId:channelId,
@@ -162,11 +161,9 @@ export class MainContainer extends Component {
 				this.fetchSpecifStream(parsed.id);
 			});
 		} else if(parsed.query) {
-			console.log('parsed query');
 			this.setState({ ...localSettingsFetch,
 				query: parsed.query});
 		} else {
-			console.log('parsed nothing');
 			this.setState({
 				...localSettingsFetch
 			})
