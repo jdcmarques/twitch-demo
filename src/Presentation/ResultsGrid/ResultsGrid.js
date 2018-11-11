@@ -3,7 +3,6 @@ import { ResultsItem } from "../ResultsItem/ResultsItem";
 import './ResultsGrid.css'
 
 export const ResultsGrid = React.memo((props) => {
-  console.log(props);
   return (
     <div>
       <div className="results">
