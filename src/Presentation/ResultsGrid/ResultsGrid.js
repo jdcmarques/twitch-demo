@@ -7,7 +7,7 @@ export const ResultsGrid = React.memo((props) => {
   return (
     <div>
       <div className="results">
-        <span>{props.results.streams.length} results</span>
+        <span>{props.results.streams ? props.results.streams.length : 0} results</span>
       </div>
       <div className="resultsGrid">
         {props.results.streams && props.results.streams.map((stream) => {
