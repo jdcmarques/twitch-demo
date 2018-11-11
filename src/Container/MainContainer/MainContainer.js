@@ -121,7 +121,7 @@ export class MainContainer extends Component {
 	componentDidUpdate = (prevProps, prevState) => {
 		if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
 			if(this.state.query === '') {
-				this.returnHome();
+				//this.returnHome();
 			} else {
 				this.setState({loading:true}, ()=>{
 					this.fetchStreams();
@@ -182,7 +182,7 @@ export class MainContainer extends Component {
 				<Navbar {...navbarProps}/>
 				{this.state.loading && <LoadingAnimation></LoadingAnimation>}
 				<Switch>
-					<Route exact path ="/" render={()=> (<LandingPage/>)}></Route>
+					<Route path ="/2" render={()=> (<LandingPage/>)}></Route>
 					<Route path= "/search" render={() => ( <ResultsGrid {...resultsProps}/>)}></Route>
 					<Route path= "/channel" render={() => ( <StreamPageContainer {...streamProps}/>)}></Route>
 				</Switch>

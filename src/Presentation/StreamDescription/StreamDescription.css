@@ -1,56 +1,59 @@
-.description_container{
+.stream-description{
     min-height: 60px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    cursor: default;
 }
-.info{
+.stream-description__details{
     display:flex;
     flex-direction: row;
     width:90%;
 }
 
-.info .logo{
+.stream-description__logo{
     width: 50px;
+    height: 50px;
+    padding:10px;
 }
   
-.information{
+.stream-description__information{
     display: flex;
     flex-direction: column;
     text-align: left;
     font-size: 1rem;
     min-width: 0;
 }
-
-.information > span {
+.stream-description__title{
     overflow: hidden;
     white-space:nowrap;
     text-overflow: ellipsis;
+    font-weight: bold;
 }
 
-.chatToggle {
+.stream-description__chat-toggle {
     width:30px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor:pointer;
 }
-.chatToggle img{
+.stream-description__chat-icon{
     width: 20px;
     text-align: center;
 }
-.chatToggle:hover {
+.stream-description__chat-toggle:hover {
     background-color: #ece9e9;
 }
-.chatToggle img.rotate {
+.stream-description__chat-icon--rotate {
     transform: rotate(180deg);
 }
 
 @media (max-width: 768px) {
-    .chatToggle img{
+    .stream-description__chat-icon{
         transform: rotate(90deg);
     }
-    .chatToggle img.rotate {
+    .stream-description__chat-icon--rotate {
         transform: rotate(-90deg);
     }
 }

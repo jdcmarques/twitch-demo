@@ -1,13 +1,13 @@
-.resultsGrid{
+.results-grid__results{
+    text-align: right;
+    padding: 10px 50px 0 0;
+    font-size: 1.2rem;
+}
+
+.results-grid__grid{
     margin-top:15px;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-}
-
-.results{
-    text-align: right;
-    padding: 10px 50px 0 0;
-    font-size: 1.2rem;
 }

@@ -1,4 +1,4 @@
-.logo{
+.navbar-logo{
   display:flex;
   color: #fff;
   padding: 10px;
@@ -8,7 +8,7 @@
   cursor:pointer;
 }
   
-.logo img{
+.navbar-logo__icon{
   height:40px;
   margin-right: 10px;
 }

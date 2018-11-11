@@ -1,15 +1,21 @@
-.resp-container, .resp-iframe {
+.iframe {
     width:100%;
     height:100%;
 }
+
+.iframe__frame{
+    width:100%;
+    height:100%;
+}
+
 @media (max-width: 768px) {
-    .stream_frame .resp-container {
+    .stream-page__stream-frame .iframe {
         position: relative;
         overflow: hidden;
         padding-top: 56.25%;
         height:auto;
     }    
-    .stream_frame .resp-iframe {
+    .stream-page__stream-frame .iframe__frame {
         position: absolute;
         top: 0;
         left: 0;

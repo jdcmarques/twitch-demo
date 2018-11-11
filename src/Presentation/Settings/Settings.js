@@ -4,16 +4,16 @@ export const Settings = React.memo((props) => {
   return (
     <div>
       {props.settingsShow && 
-        <div className='popup'>
-        <div className='popup_inner'>
-          <span>Number of streams to search</span>
-          <input type="number" min="1" max = "100" value={props.settingsDummy} onChange={props.handleSettingsInput}></input>
-          <div className="controls">
-            <button onClick={props.handleSettingsSave} data-type="cancel">Cancel</button>
-            <button onClick={props.handleSettingsSave} data-type="save">Save</button>
+        <div className='settings_popup'>
+          <div className='settings-popup__content'>
+            <span className="settings-popup__title">Number of streams to search (1-100)</span>
+            <input className="settings-popup__input" type="number" min="1" max = "100" value={props.settingsDummy} onChange={props.handleSettingsInput}></input>
+            <div className="settings-popup__controls">
+              <button className="settings-popup__button" onClick={props.handleSettingsSave} data-type="cancel">Cancel</button>
+              <button className="settings-popup__button" onClick={props.handleSettingsSave} data-type="save">Save</button>
+            </div>
           </div>
         </div>
-      </div>
       }
     </div>
   )
