@@ -121,7 +121,7 @@ export class MainContainer extends Component {
 	componentDidUpdate = (prevProps, prevState) => {
 		if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
 			if(this.state.query === '') {
-				//this.returnHome();
+				this.returnHome();
 			} else {
 				this.setState({loading:true}, ()=>{
 					this.fetchStreams();

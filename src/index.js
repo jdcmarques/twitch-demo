@@ -9,6 +9,10 @@ import { BrowserRouter } from 'react-router-dom'
 if (process.env.NODE_ENV !== 'production') {
     const {whyDidYouUpdate} = require('why-did-you-update')
     whyDidYouUpdate(React, { exclude: [/^App/] });
+    
+    const {registerObserver} = require('react-perf-devtool');
+    // Simple, no?
+    registerObserver();
 }
   
 ReactDOM.render(
