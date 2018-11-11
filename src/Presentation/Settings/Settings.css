@@ -9,13 +9,30 @@
     margin: auto;
     background-color: rgba(0,0,0, 0.5);
     z-index:3;
+    display:flex;
+    cursor: default;
   }
   .popup_inner {
-    position: absolute;
-    left: 50%;
-    height: 150px;
-    width: 150px;
-    top: 50%;
+    width: auto;
+    height: auto;
     margin: auto;
-    background: pink;
+    background: #6441A4;
   }
+  .popup_inner > * {
+    display:block;
+    margin:auto;
+    margin-bottom: 5%;
+  }
+
+  .popup_inner > input {
+    font-size:30px;
+    width:80px;
+  }
+
+ .controls {
+   display:flex;
+   justify-content: space-evenly;
+   margin-bottom:5%;
+   cursor:pointer;
+   height:40px;
+ }

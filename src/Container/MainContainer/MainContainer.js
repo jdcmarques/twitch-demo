@@ -56,11 +56,16 @@ export class MainContainer extends Component {
 	}
 	
 	handleSettingsSave = (e) => {
-		this.toggleSettingsShow();
-		this.setState ( {settingsNumber: this.state.settingsDummy},() => {
-			localStorage.setItem('settingsNumber', this.state.settingsDummy);
-			this.fetchStreams();
-		});
+		if(e.target.dataset.type === 'cancel') {	
+			this.toggleSettingsShow();
+			this.setState( {settingsDummy: this.state.settingsNumber});
+		} else if (e.target.dataset.type === 'save') {
+			this.toggleSettingsShow();
+			this.setState ( {settingsNumber: this.state.settingsDummy},() => {
+				localStorage.setItem('settingsNumber', this.state.settingsDummy);
+				this.fetchStreams();
+			});
+		}
 		
 	}
 
@@ -147,11 +152,10 @@ export class MainContainer extends Component {
 		}
 	}
 	render() {
-		const {
-					handleSearchInput, handleSettingsInput,
-					state, handleClickedStream, fetchSpecifStream,
-					handleSettingsSave, toggleSettingsShow, returnHome} = this;
-		const {settingsShow, query, results, channelId, stream, settingsDummy} = state;
+		const { handleSearchInput, handleSettingsInput,
+				state, handleClickedStream, fetchSpecifStream,
+				handleSettingsSave, toggleSettingsShow, returnHome} = this;
+		const { settingsShow, query, results, channelId, stream, settingsDummy} = state;
 		const navbarProps = {
 			query: query,
 			settingsDummy: settingsDummy,
