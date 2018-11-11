@@ -114,9 +114,11 @@ export class MainContainer extends Component {
 		TwitchAPI.getStreamById(channelId)
 			.then(
 				res => {
+					console.log(res);
 					this.setState({
 						stream:res.stream, 
-						channelId:channelId});
+						channelId:channelId,
+						loading:false});
 				}
 			)
 			.catch(
@@ -130,7 +132,8 @@ export class MainContainer extends Component {
 	// Else Triggers the loading animation and fetches streams
 	componentDidUpdate = (prevProps, prevState) => {
 		if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
-			if(this.state.query === '') {
+			if(this.state.query === '' && this.state.channelId === '') {
+				console.log('console did update');
 				this.returnHome();
 			} else {
 				this.setState({loading:true}, ()=>{
@@ -156,13 +159,15 @@ export class MainContainer extends Component {
 		const parsed = queryString.parse(this.props.location.search);
 		if(parsed.id) {
 			this.setState(
-				{...localSettingsFetch }, () => {
+				{...localSettingsFetch, channelId : parsed.id }, () => {
 				this.fetchSpecifStream(parsed.id);
 			});
 		} else if(parsed.query) {
+			console.log('parsed query');
 			this.setState({ ...localSettingsFetch,
 				query: parsed.query});
 		} else {
+			console.log('parsed nothing');
 			this.setState({
 				...localSettingsFetch
 			})
@@ -170,7 +175,7 @@ export class MainContainer extends Component {
 	}
 	render() {
 		const { handleSearchInput, handleSettingsInput,
-				state, handleClickedStream, fetchSpecifStream,
+				state, handleClickedStream,
 				handleSettingsSave, toggleSettingsShow, returnHome} = this;
 		const { settingsShow, query, results, channelId, stream, settingsDummy} = state;
 		const navbarProps = {
@@ -191,7 +196,6 @@ export class MainContainer extends Component {
 		const streamProps = {
 			channelId: channelId,
 			stream: stream,
-			fetchSpecifStream: fetchSpecifStream
 		}
 
 		return (

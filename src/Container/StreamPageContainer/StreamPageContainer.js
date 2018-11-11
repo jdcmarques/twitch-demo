@@ -45,13 +45,14 @@ export class StreamPageContainer extends Component {
 
   // If the component receives a channelId -> Parses the stream information
   componentDidMount = () => {
+    
     if(this.props.channelId !== '') {
       this.parseStream();
     }
   }
   // If the component receives a different channelId or not '' -> Parses the stream information
   componentDidUpdate = (prevProps, prevState) => {
-    if(prevProps.channelId !== this.props.channelId) {
+    if(prevProps.stream !== this.props.stream && this.props.channelId !== '') {
       this.parseStream();
     }
   }
