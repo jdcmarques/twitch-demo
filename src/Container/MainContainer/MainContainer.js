@@ -182,7 +182,7 @@ export class MainContainer extends Component {
 				<Navbar {...navbarProps}/>
 				{this.state.loading && <LoadingAnimation></LoadingAnimation>}
 				<Switch>
-					<Route path ="/2" render={()=> (<LandingPage/>)}></Route>
+					<Route exact path ="/" render={()=> (<LandingPage/>)}></Route>
 					<Route path= "/search" render={() => ( <ResultsGrid {...resultsProps}/>)}></Route>
 					<Route path= "/channel" render={() => ( <StreamPageContainer {...streamProps}/>)}></Route>
 				</Switch>
