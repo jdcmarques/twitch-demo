@@ -133,7 +133,6 @@ export class MainContainer extends Component {
 	componentDidUpdate = (prevProps, prevState) => {
 		if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
 			if(this.state.query === '' && this.state.channelId === '') {
-				console.log('console did update');
 				this.returnHome();
 			} else {
 				this.setState({loading:true}, ()=>{
