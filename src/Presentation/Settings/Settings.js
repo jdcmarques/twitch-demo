@@ -1,5 +1,9 @@
 import React from 'react'
 import './Settings.css'
+
+// Stateless Presentation Component
+// Component for Settings Modal / Popup -> receives handlers and initial value as prop
+
 export const Settings = React.memo((props) => {
   return (
     <div>

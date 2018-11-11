@@ -2,6 +2,9 @@ import React from 'react'
 import { Settings } from "../../Utils/ImportsPresentation";
 import './SettingsIcon.css'
 
+// Stateless Presentation Component
+// Component for Settings Popup toggler
+
 export const SettingsIcon = React.memo((props) => {
   return (
     <div className="settings-icon">

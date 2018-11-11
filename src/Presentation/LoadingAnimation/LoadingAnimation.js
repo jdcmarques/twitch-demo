@@ -1,6 +1,9 @@
 import React from 'react'
 import './LoadingAnimation.css';
 
+// Stateless Presentation Component
+// Component for the main Loading Animation
+
 export const LoadingAnimation = React.memo(() => {
   return (
     <div className="loading">

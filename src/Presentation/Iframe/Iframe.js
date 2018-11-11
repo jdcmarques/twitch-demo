@@ -1,5 +1,8 @@
 import React from 'react'
 import './Iframe.css'
+
+// Stateless Presentation Component
+// Component for Embedded frames
 export const Iframe = React.memo((props) => {
   return (
     <div className="iframe">

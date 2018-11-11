@@ -1,3 +1,6 @@
+// Import file for all Presentation / Stateless Components -> Useful if app gets to big, no need to lose time looking for specific paths
+// Just import the components needed
+
 /* eslint-disable no-unused-vars */
 export { Iframe } from "../Presentation/Iframe/Iframe";
 export { LandingPage } from '../Presentation/LandingPage/LandingPage';

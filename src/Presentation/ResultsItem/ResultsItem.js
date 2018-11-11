@@ -1,6 +1,9 @@
 import React from 'react'
 import './ResultsItem.css'
 
+// Stateless Presentation Component
+// Component for Stream Result Card
+
 export const ResultsItem = React.memo((props) => {
   const {stream} = props;
   return (

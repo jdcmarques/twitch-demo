@@ -1,6 +1,9 @@
 import React from 'react'
 import './Logo.css'
 
+// Stateless Presentation Component
+// Component for the App Logo - Name
+
 export const Logo = React.memo((props) => {
   return (
     <div className="navbar-logo" onClick={props.returnHome}>

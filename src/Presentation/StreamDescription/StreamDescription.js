@@ -1,6 +1,10 @@
 import React from 'react'
 import './StreamDescription.css'
 
+// Stateless Presentation Component
+// Component for Stream Description on Stream Showing Page -> Shows the information of the currently watched stream ->
+// Also triggers showing / hiding chat frame
+
 export const StreamDescription = React.memo((props) => {
   return (
     <div className="stream-description">

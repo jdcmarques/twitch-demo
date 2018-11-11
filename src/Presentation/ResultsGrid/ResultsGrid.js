@@ -2,6 +2,9 @@ import React from 'react'
 import { ResultsItem } from "../ResultsItem/ResultsItem";
 import './ResultsGrid.css'
 
+// Stateless Presentation Component
+// Component for Results Page -> Shows up-top the number of results -> Shows a Stream Result Card for each of the streams received
+
 export const ResultsGrid = React.memo((props) => {
   return (
     <div className="results-grid">

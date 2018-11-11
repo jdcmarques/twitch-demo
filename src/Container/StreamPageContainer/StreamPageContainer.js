@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { StreamPage, LoadingAnimation } from "../../Utils/ImportsPresentation";
 import * as TwitchAPI from '../../Utils/TwitchAPI';
 export class StreamPageContainer extends Component {
+  // Basic Stream Page Information
   state= {
     startedViewersUpdate: false,
     showChat: true,
@@ -15,6 +16,7 @@ export class StreamPageContainer extends Component {
     loading:true,
   }
   
+  // Toggles Between Showing / Hiding the chat Frame
   toggleChat = () => {
     this.setState((prevState, props) => {
       return {
@@ -22,7 +24,7 @@ export class StreamPageContainer extends Component {
       }
     });
   }
-
+  // Fetches Stream Information -> Updates number of viewers on the State
   getUpdatedViewers = () => {
     TwitchAPI.getStreamById(this.props.channelId)
     .then(
@@ -41,21 +43,25 @@ export class StreamPageContainer extends Component {
       
   }
 
+  // If the component receives a channelId -> Parses the stream information
   componentDidMount = () => {
     if(this.props.channelId !== '') {
       this.parseStream();
     }
   }
-
+  // If the component receives a different channelId or not '' -> Parses the stream information
   componentDidUpdate = (prevProps, prevState) => {
     if(prevProps.channelId !== this.props.channelId) {
       this.parseStream();
     }
   }
+
+  // Stops the Viewer Updater function
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
+  // Receives a Stream Information object from Twitch API -> Retrieves needed information -> Starts viewer number updater on a 3 seconds loop
   parseStream = () => {
     const {stream} = this.props;
     this.setState({

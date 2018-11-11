@@ -25,10 +25,13 @@ export class MainContainer extends Component {
 		},
 	}
 
+	// Search Input Handler -> Passes down as props to the Search Input Component
 	handleSearchInput = (e) => {
 		this.setState({query:e.target.value});
 	}
 
+	// Number of streams Settings Handler -> Passes down as props to the Settings Input Component
+	// If the value is not between 0 and 100 it doesn't allow the user to change <- Twitch API Limit Input
 	handleSettingsInput = (e) => {
 		if( e.target.value > 0 && e.target.value <= 100){
 			this.setState( {settingsDummy: e.target.value} );
@@ -38,6 +41,38 @@ export class MainContainer extends Component {
 		}
 	}
 
+	// Handles Settings Modal Close / Save -> Passed down as props to Settings Input Component
+	handleSettingsSave = (e) => {
+		if(e.target.dataset.type === 'cancel') {	
+			this.toggleSettingsShow();
+			this.setState( {settingsDummy: this.state.settingsNumber});
+		} else if (e.target.dataset.type === 'save') {
+			this.toggleSettingsShow();
+			this.setState ( {settingsNumber: this.state.settingsDummy},() => {
+				localStorage.setItem('settingsNumber', this.state.settingsDummy);
+				this.fetchStreams();
+			});
+		}
+	}
+
+	// Toggles Settings Visibility State -> Passes down as props
+	toggleSettingsShow = () => {
+		this.setState((prevState)=> {
+			return {
+				settingsShow: !prevState.settingsShow
+			}
+		})
+	}
+
+	// Handles Stream selection by the user -> Updates URL also -> Passed down as props to stream results page
+	handleClickedStream = (stream, e) => {
+		this.setState({
+			channelId: e.target.dataset.id,
+			stream: stream});
+		this.props.history.push(`/channel?id=${e.target.dataset.id}`);
+	}
+
+	// Resets everything -> query = empty, results object becomes empty -> stream object becomes empty -> updates Path no Home
 	returnHome = () => {
 		this.setState ( {
 			query: '',
@@ -54,36 +89,8 @@ export class MainContainer extends Component {
 		});
 		this.props.history.push(`/`);
 	}
-	
-	handleSettingsSave = (e) => {
-		if(e.target.dataset.type === 'cancel') {	
-			this.toggleSettingsShow();
-			this.setState( {settingsDummy: this.state.settingsNumber});
-		} else if (e.target.dataset.type === 'save') {
-			this.toggleSettingsShow();
-			this.setState ( {settingsNumber: this.state.settingsDummy},() => {
-				localStorage.setItem('settingsNumber', this.state.settingsDummy);
-				this.fetchStreams();
-			});
-		}
-		
-	}
 
-	handleClickedStream = (stream, e) => {
-		this.setState({
-			channelId: e.target.dataset.id,
-			stream: stream});
-		this.props.history.push(`/channel?id=${e.target.dataset.id}`);
-	}
-
-	toggleSettingsShow = () => {
-		this.setState((prevState)=> {
-			return {
-				settingsShow: !prevState.settingsShow
-			}
-		})
-	}
-
+	// Fetches Stream Search Results debounced -> In order to not overload the Twitch API with incremental Search
 	fetchStreams = debounce(() => {
 		const {query, settingsNumber} = this.state;
 		if(this.state.query !== '') {
@@ -102,6 +109,7 @@ export class MainContainer extends Component {
 		}
 	} ,1000)
 
+	// Fetches Stream Information based on Channel ID -> Accessing Streams by shared link
 	fetchSpecifStream = (channelId) => {
 		TwitchAPI.getStreamById(channelId)
 			.then(
@@ -118,6 +126,8 @@ export class MainContainer extends Component {
 			)
 	}
 
+	// If the Search input is empty, the APP is restored to home status
+	// Else Triggers the loading animation and fetches streams
 	componentDidUpdate = (prevProps, prevState) => {
 		if((prevState.query !== this.state.query || prevState.settingsNumber !== this.state.settingsNumber)) {
 			if(this.state.query === '') {
@@ -130,6 +140,13 @@ export class MainContainer extends Component {
 		}
 	}
 
+	/*
+		Fetches Local Storage Number of streams to watch. If it doesn't exists set's to twitch default - 25
+		Parses the URL ->
+			If it's a stream URL -> fetches specific stream information after setting the Number of Streams Setting
+			If it's a search URL -> fetches streams based on query after setting the Number of Streams Setting
+			If / -> sets Number of Streams Setting
+	*/
 	componentDidMount = () => {
 		let localSettingsFetch = localStorage.getItem('settingsNumber') || 25;
 		localSettingsFetch = {
