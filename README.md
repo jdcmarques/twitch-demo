@@ -37,7 +37,7 @@ Open browser on [localhost:3000/](http://localhost:3000/)
 
 
 
-Pushing to master branch will start the  build process and deploy it to [netlify]([https://jdcmarques.netlify.com](https://jdcmarques.netlify.com/))
+Pushing to master branch will start the  build process and deploy it to [netlify](https://jdcmarques.netlify.com/))
 
   
 
