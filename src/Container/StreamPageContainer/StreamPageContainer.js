@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { StreamPage, LoadingAnimation } from "../../Utils/ImportsPresentation";
 import * as TwitchAPI from '../../Utils/TwitchAPI';
+import { toast } from 'react-toastify';
+
 export class StreamPageContainer extends Component {
   // Basic Stream Page Information
   state= {
@@ -31,13 +33,13 @@ export class StreamPageContainer extends Component {
           res => {
             this.setState({streamInfo:{
               ...this.state.streamInfo,
-              viewers: res.stream.viewers
+              viewers: res.data.stream.viewers
             }});
           }
       )
       .catch(
         err => {
-          console.log(err);
+          toast.error(`Error ${err.response.data.status} - ${err.response.data.error}`);
         }
       );
       

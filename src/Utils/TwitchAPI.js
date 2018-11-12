@@ -31,8 +31,7 @@ export const searchStreams = (query,limit) =>
     headers: {
       ...headers,
     },
-  }).then(res => res.data)
-  .catch(err => err);
+  });
 
 //Get specif stream information based on channel ID
 export const getStreamById = (query) =>
@@ -40,5 +39,4 @@ export const getStreamById = (query) =>
     headers: {
       ...headers,
     },
-  }).then(res=> res.data)
-  .catch(err => err);
+  });

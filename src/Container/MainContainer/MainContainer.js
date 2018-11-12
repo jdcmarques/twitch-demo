@@ -5,6 +5,8 @@ import { debounce } from '../../Utils/AuxiliarFunctions';
 import * as TwitchAPI from '../../Utils/TwitchAPI';
 import { Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
+import { toast } from 'react-toastify';
+
 
 export class MainContainer extends Component {
 	state = {
@@ -47,6 +49,9 @@ export class MainContainer extends Component {
 			this.toggleSettingsShow();
 			this.setState( {settingsDummy: this.state.settingsNumber});
 		} else if (e.target.dataset.type === 'save') {
+			toast.info(`Settings saved successfully`,{
+				autoClose: 1500,
+			});
 			this.toggleSettingsShow();
 			this.setState ( {settingsNumber: this.state.settingsDummy},() => {
 				localStorage.setItem('settingsNumber', this.state.settingsDummy);
@@ -96,14 +101,14 @@ export class MainContainer extends Component {
 		if(this.state.query !== '') {
 			this.props.history.push(`/search?query=${this.state.query}`);
 			TwitchAPI.searchStreams(query, settingsNumber)
-			.then(
-					res => {
-						this.setState({results: res, loading:false});
-					}
+			.then(res => 
+				{
+					this.setState({results: res.data, loading:false});
+				}
 			)
 			.catch(
 				err => {
-					console.log(err);
+					toast.error(`Error ${err.response.data.status} - ${err.response.data.error}`);
 				}
 			)
 		}
@@ -114,15 +119,20 @@ export class MainContainer extends Component {
 		TwitchAPI.getStreamById(channelId)
 			.then(
 				res => {
-					this.setState({
-						stream:res.stream, 
-						channelId:channelId,
-						loading:false});
+					if (res.data.stream === null) {
+						toast.error(`Channel doesn't exist`);
+						this.returnHome();
+					} else {
+						this.setState({
+							stream:res.data.stream, 
+							channelId:channelId,
+							loading:false});
+					}
 				}
 			)
 			.catch(
 				err => {
-					console.log(err);
+					toast.error(`Error ${err.response.data.status} - ${err.response.data.error}`);
 				}
 			)
 	}
