@@ -21,7 +21,7 @@ App was created with [Create React App](https://github.com/facebook/create-react
 
 or in a single line
 
-    git clone https://github.com/jdcmarques/twitch-demo.git twitch-demo-jdmarques && cd twitch-demo-jdmarques && npm install && npm start
+    git clone https://github.com/jdcmarques/twitch-demo.git twitch-demo-jdcmarques && cd twitch-demo-jdcmarques && npm install && npm start
 
 ## Running the app normally
 
